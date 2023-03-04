@@ -23,6 +23,20 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      name: `tag`,
+      title: `Tag`,
+      type: `string`,
+      options: {
+        list: [
+          { value: `app`, title: `Apps + Interactives` },
+          { value: `branding`, title: `Branding` },
+          { value: `scale`, title: `Large-Scale Work` },
+          { value: `illustration`, title: `Illustration` },
+        ],
+      },
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
       name: `slug`,
       type: `slug`,
       options: {

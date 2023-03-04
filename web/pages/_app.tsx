@@ -8,6 +8,7 @@ import { CacheProvider } from "@emotion/react";
 import "twin.macro";
 
 import GlobalStyles from "@web/src/style/global";
+import "@web/public/style/global.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [showChild, setShowChild] = useState<boolean>(false);
@@ -24,12 +25,8 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>ronniebee.dev</title>
-        <meta
-          name="description"
-          content="Piper Olsen Portfolio Website"
-          key="desc"
-        />
+        <title>Piper Olsen</title>
+        <meta name="description" content="Piper Olsen Portfolio Website" key="desc" />
         <meta property="og:url" content="https://ronniebee.dev" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en" />
@@ -39,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <CacheProvider value={cache}>
         <GlobalStyles />
-        <main tw="antialiased font-sans min-h-screen w-screen bg-grey-200">
+        <main tw="antialiased font-sans min-h-screen w-screen">
           <Component {...pageProps} />
         </main>
       </CacheProvider>

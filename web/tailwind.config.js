@@ -5,21 +5,24 @@ module.exports = {
         current: `currentColor`,
         transparent: `transparent`,
         black: `black`,
-        white: `white`,
-        grey: {
-          100: `#F8F9FA`,
-          200: `#E9ECEF`,
-          300: `#DEE2E6`,
-          400: `#CED4DA`,
-          500: `#ADB5BD`,
-          600: `#6C757D`,
-          700: `#495057`,
-          800: `#343A40`,
-          900: `#212529`,
+        white: {
+          DEFAULT: `white`,
+          off: `#FFFDF5`,
         },
-        red: {
-          100: `#D66464`,
+        olive: {
+          DEFAULT: `#637571`,
+          dark: `#2C3631`,
         },
+        purple: {
+          DEFAULT: `#9747FF`,
+          pale: `#CDC6FF`,
+        },
+        forest: `#155B55`,
+        plum: `#37123D`,
+        teal: `#3B968D`,
+        mint: `#D7FCD3`,
+        pink: `#FFD4E4`,
+        yellow: `#FFFB9D`,
       },
       fontSize: {
         "2xs": [`11px`, `14.3px`],
@@ -50,8 +53,8 @@ module.exports = {
         black: 900,
       },
       fontFamily: {
-        sans: [`Manrope`, `sans-serif`],
-        mono: [`IBM Plex Mono`, `monospace`],
+        sans: [`Nunito Sans`, `sans-serif`],
+        serif: [`Spectral`, `serif`],
       },
     },
   },
