@@ -34,7 +34,10 @@ export type SiteDetail = SanityDocument & {
 export type About = SanityDocument & {
   _type: `about`;
   body: PortableTextBlock;
-  resume: FileAsset;
+  resume: {
+    _type: `file`;
+    asset: FileAsset;
+  }
   metaTitle: string;
   metaDesc: string;
 };

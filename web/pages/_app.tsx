@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffectOnce } from "react-use";
-import "twin.macro";
+import tw from "twin.macro";
 
 import { cache } from "@emotion/css";
 import { CacheProvider } from "@emotion/react";
@@ -55,9 +55,9 @@ export default function App({ Component, pageProps }: CustomAppProps) {
           <Component {...pageProps} />
         </main>
         <footer
-          className={router.pathname === `/` || router.pathname === `/about` ? `rainbow` : ``}
+          className={router.pathname === `/` ? `rainbow` : ``}
           tw="h-8 xl:(h-10)"
-          css={[projectColor(pageProps.project?.tag)]}
+          css={[projectColor(pageProps.project?.tag), router.pathname === `/about` && tw`bg-teal`]}
         />
       </CacheProvider>
     </>

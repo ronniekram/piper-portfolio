@@ -1,7 +1,13 @@
 import Link from "next/link";
 import tw, { styled } from "twin.macro";
 import AnchorLink from "react-anchor-link-smooth-scroll-v2";
-import { BsArrow90DegUp, BsArrow90DegDown, BsArrowReturnRight, BsEyeglasses } from "react-icons/bs";
+import {
+  BsArrow90DegUp,
+  BsArrow90DegDown,
+  BsArrowReturnRight,
+  BsEyeglasses,
+  BsDownload,
+} from "react-icons/bs";
 
 import { transform } from "./style";
 
@@ -38,6 +44,21 @@ export const NextProject = ({ slug }: { slug: string }) => (
       <p tw="mt-2">next project</p>
     </Content>
   </Link>
+);
+
+export const DownloadResume = ({ url }: { url: string }) => (
+  <a
+    href={url}
+    target="_blank"
+    rel="noreferrer"
+    download="piper-olsen-resume.pdf"
+    tw="w-[fit-content]"
+  >
+    <Content tw="text-olive-dark">
+      <BsDownload />
+      <p tw="">download my resume</p>
+    </Content>
+  </a>
 );
 
 const BackToTop = () => (

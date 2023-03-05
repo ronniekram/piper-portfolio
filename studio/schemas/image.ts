@@ -8,7 +8,7 @@ export default {
       title: `Image`,
       type: `image`,
       validation: (Rule: any) => Rule.required(),
-      description: `If the image is meant to be full width, it MUST BE AT LEAST 1049 PX WIDE`,
+      description: `If the image is meant to be full width, it MUST BE AT LEAST 1049 PX WIDE. One column images must be at least 515 px wide.`,
       options: {
         hotspot: true,
         metadata: [`blurhash`, `lqip`, `palette`, `exif`, `location`],

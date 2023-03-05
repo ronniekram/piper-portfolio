@@ -8,7 +8,7 @@ import { sanityClient } from "@web/lib/sanity.client";
 import ProjectTag from "@web/src/project/tag";
 import ProjectDetail from "@web/src/project/detail";
 import ProjectMedia from "@web/src/project/media";
-import BackToTop, { ToDetail } from "@web/src/common/go-to";
+import BackToTop from "@web/src/common/go-to";
 
 import { Container as C } from "@web/src/common/style";
 
