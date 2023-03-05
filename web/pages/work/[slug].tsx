@@ -50,7 +50,7 @@ const Work: NextPage<PageProps> = ({ project, nextProject }: PageProps) => {
           )}
         </section>
       </Container>
-      <div tw="w-full flex justify-center mt-32 mb-12">
+      <div tw="hidden xl:(w-full flex justify-center mt-32 mb-12 )">
         <BackToTop />
       </div>
     </>

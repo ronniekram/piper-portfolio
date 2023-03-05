@@ -2,7 +2,7 @@ import { PortableText } from "@portabletext/react";
 import type { PortableTextReactComponents } from "@portabletext/react";
 import tw, { styled } from "twin.macro";
 
-import BackToTop, { SeeLive } from "@web/src/common/go-to";
+import BackToTop, { SeeLive, NextProject } from "@web/src/common/go-to";
 import { Project } from "@web/../studio/utils/types";
 
 //! ----------> STYLES <----------
@@ -31,11 +31,14 @@ const ProjectDetail = ({ project, nextSlug }: { project: Project; nextSlug: stri
     </div>
     {project.live && (
       <div tw="mt-4">
-        <SeeLive slug={nextSlug} />
+        <SeeLive url={project.live} />
       </div>
     )}
     <div tw="mt-20 xl:(hidden mt-0)">
       <BackToTop />
+    </div>
+    <div tw="hidden xl:(mt-20 block)">
+      <NextProject slug={nextSlug} />
     </div>
   </Container>
 );

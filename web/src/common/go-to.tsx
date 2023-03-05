@@ -1,7 +1,7 @@
 import Link from "next/link";
 import tw, { styled } from "twin.macro";
 import AnchorLink from "react-anchor-link-smooth-scroll-v2";
-import { BsArrow90DegUp, BsArrow90DegDown, BsEyeglasses } from "react-icons/bs";
+import { BsArrow90DegUp, BsArrow90DegDown, BsArrowReturnRight, BsEyeglasses } from "react-icons/bs";
 
 import { transform } from "./style";
 
@@ -22,10 +22,19 @@ export const ToDetail = () => (
   </AnchorLink>
 );
 
-export const SeeLive = ({ slug }: { slug: string }) => (
-  <Link href={`/work/${slug}`}>
+export const SeeLive = ({ url }: { url: string }) => (
+  <a href={url} target="_blank" rel="noreferrer">
     <Content>
       <BsEyeglasses />
+      <p tw="mt-2">next project</p>
+    </Content>
+  </a>
+);
+
+export const NextProject = ({ slug }: { slug: string }) => (
+  <Link href={`/work/${slug}`}>
+    <Content>
+      <BsArrowReturnRight />
       <p tw="mt-2">next project</p>
     </Content>
   </Link>

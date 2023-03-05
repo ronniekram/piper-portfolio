@@ -16,9 +16,9 @@ const ProjectCard = ({ project }: { project: Project }) => {
     <Link href={`/work/${project.slug.current}`} aria-label="Project details">
       <div onMouseEnter={() => set(true)} onMouseLeave={() => set(false)}>
         {isHover ? (
-          <Image src={thumb} alt="" width={768} height={730} quality={100} priority />
-        ) : (
           <Image src={thumbHover} alt="" width={768} height={730} quality={100} priority />
+        ) : (
+          <Image src={thumb} alt="" width={768} height={730} quality={100} priority />
         )}
       </div>
     </Link>
