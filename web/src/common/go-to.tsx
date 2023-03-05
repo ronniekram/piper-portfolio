@@ -29,7 +29,7 @@ export const ToDetail = () => (
 );
 
 export const SeeLive = ({ url }: { url: string }) => (
-  <a href={url} target="_blank" rel="noreferrer">
+  <a href={url} target="_blank" rel="noreferrer" css={[transform]}>
     <Content>
       <BsEyeglasses />
       <p tw="mt-2">next project</p>
@@ -39,7 +39,7 @@ export const SeeLive = ({ url }: { url: string }) => (
 
 export const NextProject = ({ slug }: { slug: string }) => (
   <Link href={`/work/${slug}`}>
-    <Content>
+    <Content css={[transform]}>
       <BsArrowReturnRight />
       <p tw="mt-2">next project</p>
     </Content>
@@ -54,7 +54,7 @@ export const DownloadResume = ({ url }: { url: string }) => (
     download="piper-olsen-resume.pdf"
     tw="w-[fit-content]"
   >
-    <Content tw="text-olive-dark">
+    <Content tw="text-forest transition duration-500 ease-in-out hover:(text-olive-dark)">
       <BsDownload />
       <p tw="">download my resume</p>
     </Content>

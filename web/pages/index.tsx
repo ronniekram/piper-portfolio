@@ -20,36 +20,32 @@ type PageProps = {
 const Grid = styled(Container)`
   ${tw`grid gap-4 xl:(gap-6)`};
   ${tw`grid-cols-1 md:(grid-cols-2) lg:(grid-cols-3)`};
-  ${tw`pt-6 pb-20 md:(pt-8 pb-24) xl:(pb-32)`};
+  ${tw`mb-4 xl:(mb-6)`};
 `;
+
+const Row = ({ projects }: { projects: Project[] }) => {
+  return (
+    <Grid>
+      {projects.map((project) => (
+        <div key={project.slug.current}>
+          <ProjectCard project={project} />
+        </div>
+      ))}
+    </Grid>
+  );
+};
 
 const Home: NextPage = (props: PageProps) => {
   const { apps, branding, illustrations, scale } = props;
 
   return (
     <div tw="w-screen h-full bg-white-off">
-      <Grid>
-        {illustrations.map((project) => (
-          <div key={project.slug.current}>
-            <ProjectCard project={project} />
-          </div>
-        ))}
-        {scale.map((project) => (
-          <div key={project.slug.current}>
-            <ProjectCard project={project} />
-          </div>
-        ))}
-        {branding.map((project) => (
-          <div key={project.slug.current}>
-            <ProjectCard project={project} />
-          </div>
-        ))}
-        {apps.map((project) => (
-          <div key={project.slug.current}>
-            <ProjectCard project={project} />
-          </div>
-        ))}
-      </Grid>
+      <div tw="pt-6 pb-20 md:(pt-8 pb-24) xl:(pb-32)">
+        <Row projects={illustrations} />
+        <Row projects={scale} />
+        <Row projects={branding} />
+        <Row projects={apps} />
+      </div>
       <div tw="w-full flex justify-center pb-8">
         <BackToTop />
       </div>

@@ -4,9 +4,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffectOnce } from "react-use";
 import tw from "twin.macro";
-
 import { cache } from "@emotion/css";
 import { CacheProvider } from "@emotion/react";
+import { BsArrowThroughHeart } from "react-icons/bs";
+
 import { Project } from "../../studio/utils/types";
 
 import GlobalStyles from "@web/src/style/global";
@@ -56,9 +57,18 @@ export default function App({ Component, pageProps }: CustomAppProps) {
         </main>
         <footer
           className={router.pathname === `/` ? `rainbow` : ``}
-          tw="h-8 xl:(h-10)"
+          tw="h-8 px-5 md:(px-10) xl:(px-20 h-10) flex justify-end items-center"
           css={[projectColor(pageProps.project?.tag), router.pathname === `/about` && tw`bg-teal`]}
-        />
+        >
+          <a
+            href="https://ronniebee.dev/"
+            target="_blank"
+            rel="noreferrer"
+            tw="text-2xs text-plum font-sans font-xbold flex items-center transition duration-500 ease-in-out hover:(text-olive-dark)"
+          >
+            <p tw="mr-1.5">Made with</p> <BsArrowThroughHeart /> <p tw="ml-1.5">by ronnie bee</p>
+          </a>
+        </footer>
       </CacheProvider>
     </>
   );
