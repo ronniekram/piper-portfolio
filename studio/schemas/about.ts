@@ -10,17 +10,23 @@ export default {
   ],
   fields: [
     {
-      name: `title`,
-      title: `The Big Text`,
-      description: `On the left`,
-      type: `string`,
-      validation: (Rule: any) => Rule.required(),
-    },
-    {
-      name: `detail`,
-      title: `The Little Text`,
-      description: `On the right`,
-      type: `text`,
+      name: `body`,
+      title: `Body`,
+      description: `It's all about you`,
+      type: `array`,
+      of: [
+        {
+          type: `block`,
+          styles: [
+            { value: `normal`, title: `Normal` },
+          ],
+          lists: [],
+          marks: {
+            decorators: [],
+            annotations: [],
+          },
+        },
+      ],
       validation: (Rule: any) => Rule.required(),
     },
     {

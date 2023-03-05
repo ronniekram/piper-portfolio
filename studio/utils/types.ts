@@ -1,4 +1,4 @@
-import type { FileAsset, ImageAsset, ImageCrop, ImageHotspot, ImageMetadata, AssetSource } from "sanity";
+import type { FileAsset, ImageAsset, ImageCrop, ImageHotspot, ImageMetadata, AssetSource, PortableTextBlock } from "sanity";
 
 import type { SanityDocument } from "@sanity/client";
 
@@ -31,8 +31,7 @@ export type SiteDetail = SanityDocument & {
 
 export type About = SanityDocument & {
   _type: `about`;
-  title: string;
-  detail: string;
+  body: PortableTextBlock;
   resume: FileAsset;
   metaTitle: string;
   metaDesc: string;
@@ -41,6 +40,7 @@ export type About = SanityDocument & {
 export type Project = SanityDocument & {
   _type: `project`;
   title: string;
+  tag: string;
   slug: {
     current: string;
   };

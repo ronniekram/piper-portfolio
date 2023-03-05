@@ -43,8 +43,6 @@ export default {
         source: `title`,
         slugify: (input: string) => input.toLowerCase().replace(/\s+/g, `-`).slice(0, 200),
       },
-      hidden: true,
-      readOnly: true,
       validation: (Rule: any) => Rule.required(),
     },
     {
