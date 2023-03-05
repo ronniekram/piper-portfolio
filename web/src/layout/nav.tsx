@@ -5,7 +5,7 @@ import tw, { styled } from "twin.macro";
 import { BsLinkedin, BsInstagram, BsList, BsXSquare } from "react-icons/bs";
 
 import Logo from "@web/src/assets/logo";
-import { Container as C } from "@web/src/common/style";
+import { Container as C, transform } from "@web/src/common/style";
 
 //! ----------> TYPES <----------
 type NavProps = {
@@ -26,16 +26,14 @@ const Container = styled(C)`
   ${tw`w-full flex items-center justify-between`};
 `;
 
-const transform = tw`transition duration-500 ease-in-out hover:(text-forest)`;
-
 //! ----------> COMPONENTS <----------
 const Nav = ({ email, insta, linkedin }: NavProps) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <Wrapper>
+    <Wrapper id="nav">
       <Container>
-        <div tw="flex items-center space-x-5 text-2xl">
+        <div tw="flex items-center space-x-5 text-2xl xl:(w-1/3)">
           <a
             href={linkedin}
             target="_blank"
@@ -60,16 +58,18 @@ const Nav = ({ email, insta, linkedin }: NavProps) => {
           </a>
         </div>
 
-        <div tw="w-[12.3125rem] md:(w-[15.4375rem])">
-          <Link href="/" passHref aria-label="Home">
-            <a css={[transform]}>
-              <Logo />
-            </a>
-          </Link>
+        <div tw="xl:(w-1/3)">
+          <div tw="w-[12.3125rem] md:(w-[15.4375rem]) mx-auto">
+            <Link href="/" passHref aria-label="Home">
+              <a css={[transform]}>
+                <Logo />
+              </a>
+            </Link>
+          </div>
         </div>
 
-        <div>
-          <div tw="hidden xl:(flex items-center space-x-9 text-xl)">
+        <div tw="xl:(w-1/3)">
+          <div tw="hidden xl:(flex items-center justify-end space-x-9 text-xl)">
             <Link href="/" passHref>
               <a css={[transform]}>work</a>
             </Link>

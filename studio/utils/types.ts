@@ -11,8 +11,10 @@ export type Image = {
   metadata?: ImageMetadata;
 };
 
-export type ProjectImage = Image & {
+export type ProjectImage = {
+  image: Image;
   wide?: boolean;
+  alt?: string;
 };
 
 export type Credit = {
@@ -46,10 +48,11 @@ export type Project = SanityDocument & {
   };
   thumb: Image;
   thumbHover: Image;
-  desc: string;
+  desc: PortableTextBlock;
   credits: Credit[];
   live?: string;
   media: ProjectImage[];
+  related: ProjectImage[];
   metaTitle?: string;
   metaDesc?: string;
 };

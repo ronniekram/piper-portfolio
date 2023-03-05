@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffectOnce } from "react-use";
+import "twin.macro";
 
 import { cache } from "@emotion/css";
 import { CacheProvider } from "@emotion/react";
-import tw from "twin.macro";
 import { Project } from "../../studio/utils/types";
 
 import GlobalStyles from "@web/src/style/global";
 import Nav from "@web/src/layout/nav";
+
+import { projectColor } from "@web/src/utils";
 
 import "@web/public/style/global.css";
 
@@ -25,24 +27,6 @@ export default function App({ Component, pageProps }: CustomAppProps) {
   const router = useRouter();
 
   const [showChild, setShowChild] = useState<boolean>(false);
-  const [open, setOpen] = useState<boolean>(false);
-
-  const footerColor = () => {
-    switch (pageProps.project?.tag) {
-      case `app`: {
-        return tw`bg-purple-pale`;
-      }
-      case `branding`: {
-        return tw`bg-pink`;
-      }
-      case `scale`: {
-        return tw`bg-yellow`;
-      }
-      case `illustration`: {
-        return tw`bg-mint`;
-      }
-    }
-  };
 
   useEffectOnce(() => {
     setShowChild(true);
@@ -67,13 +51,13 @@ export default function App({ Component, pageProps }: CustomAppProps) {
       <CacheProvider value={cache}>
         <GlobalStyles />
         <Nav email={pageProps.email} insta={pageProps.insta} linkedin={pageProps.linkedin} />
-        <main tw="antialiased font-sans min-h-screen w-screen">
+        <main tw="antialiased font-sans min-h-screen w-screen bg-white-off">
           <Component {...pageProps} />
         </main>
         <footer
           className={router.pathname === `/` || router.pathname === `/about` ? `rainbow` : ``}
           tw="h-8 xl:(h-10)"
-          css={[footerColor()]}
+          css={[projectColor(pageProps.project?.tag)]}
         />
       </CacheProvider>
     </>

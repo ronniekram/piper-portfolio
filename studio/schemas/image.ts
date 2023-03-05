@@ -2,15 +2,17 @@ export default {
   name: `img`,
   title: `Project Image`,
   type: `object`,
-  // USE GRID SPAN FOR FULL WIDTH IMAGES
   fields: [
     {
       name: `image`,
       title: `Image`,
       type: `image`,
       validation: (Rule: any) => Rule.required(),
+      description: `If the image is meant to be full width, it MUST BE AT LEAST 1049 PX WIDE`,
       options: {
         hotspot: true,
+        metadata: [`blurhash`, `lqip`, `palette`, `exif`, `location`],
+        crop: true,
       },
     },
     {
@@ -18,6 +20,11 @@ export default {
       title: `Image Width`,
       type: `boolean`,
       description: `When set to true, the image will take the full width of it's container`,
+    },
+    {
+      name: `alt`,
+      title: `Alt Text`,
+      type: `string`,
     },
   ],
 };
