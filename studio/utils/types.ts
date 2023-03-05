@@ -1,4 +1,4 @@
-import type { FileAsset, ImageAsset, ImageCrop, ImageHotspot, ImageMetadata, AssetSource } from "sanity";
+import type { FileAsset, ImageAsset, ImageCrop, ImageHotspot, ImageMetadata, AssetSource, PortableTextBlock } from "sanity";
 
 import type { SanityDocument } from "@sanity/client";
 
@@ -11,8 +11,10 @@ export type Image = {
   metadata?: ImageMetadata;
 };
 
-export type ProjectImage = Image & {
+export type ProjectImage = {
+  image: Image;
   wide?: boolean;
+  alt?: string;
 };
 
 export type Credit = {
@@ -31,8 +33,7 @@ export type SiteDetail = SanityDocument & {
 
 export type About = SanityDocument & {
   _type: `about`;
-  title: string;
-  detail: string;
+  body: PortableTextBlock;
   resume: FileAsset;
   metaTitle: string;
   metaDesc: string;
@@ -41,15 +42,17 @@ export type About = SanityDocument & {
 export type Project = SanityDocument & {
   _type: `project`;
   title: string;
+  tag: string;
   slug: {
     current: string;
   };
   thumb: Image;
   thumbHover: Image;
-  desc: string;
+  desc: PortableTextBlock;
   credits: Credit[];
   live?: string;
   media: ProjectImage[];
+  related: ProjectImage[];
   metaTitle?: string;
   metaDesc?: string;
 };

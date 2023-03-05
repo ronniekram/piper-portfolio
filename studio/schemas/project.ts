@@ -43,8 +43,6 @@ export default {
         source: `title`,
         slugify: (input: string) => input.toLowerCase().replace(/\s+/g, `-`).slice(0, 200),
       },
-      hidden: true,
-      readOnly: true,
       validation: (Rule: any) => Rule.required(),
     },
     {
@@ -71,7 +69,20 @@ export default {
     {
       name: `desc`,
       title: `Project Description*`,
-      type: `text`,
+      type: `array`,
+      of: [
+        {
+          type: `block`,
+          styles: [
+            { value: `normal`, title: `Normal` },
+          ],
+          lists: [],
+          marks: {
+            decorators: [],
+            annotations: [],
+          },
+        },
+      ],
       group: `details`,
       validation: (Rule: any) => Rule.required(),
     },
@@ -95,6 +106,12 @@ export default {
       type: `array`,
       of: [{ type: `img` }],
       validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: `related`,
+      title: `Related Work`,
+      type: `array`,
+      of: [{ type: `img` }],
     },
     // ORDER RANK FIELD
     orderRankField({ type: `project` }),

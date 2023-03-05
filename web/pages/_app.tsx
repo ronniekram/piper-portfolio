@@ -1,18 +1,32 @@
 import { useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffectOnce } from "react-use";
+import "twin.macro";
 
 import { cache } from "@emotion/css";
 import { CacheProvider } from "@emotion/react";
-import "twin.macro";
+import { Project } from "../../studio/utils/types";
 
 import GlobalStyles from "@web/src/style/global";
+import Nav from "@web/src/layout/nav";
+
+import { projectColor } from "@web/src/utils";
+
 import "@web/public/style/global.css";
 
-export default function App({ Component, pageProps }: AppProps) {
+type CustomAppProps = AppProps & {
+  email: string;
+  insta: string;
+  linkedin: string;
+  project?: Project;
+};
+
+export default function App({ Component, pageProps }: CustomAppProps) {
+  const router = useRouter();
+
   const [showChild, setShowChild] = useState<boolean>(false);
-  const [open, setOpen] = useState<boolean>(false);
 
   useEffectOnce(() => {
     setShowChild(true);
@@ -27,7 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Piper Olsen</title>
         <meta name="description" content="Piper Olsen Portfolio Website" key="desc" />
-        <meta property="og:url" content="https://ronniebee.dev" />
+        <meta property="og:url" content="https://piperolsen.design" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en" />
         {/* <meta property="og:image" content="/opengraph.jpg" />
@@ -36,9 +50,15 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <CacheProvider value={cache}>
         <GlobalStyles />
-        <main tw="antialiased font-sans min-h-screen w-screen">
+        <Nav email={pageProps.email} insta={pageProps.insta} linkedin={pageProps.linkedin} />
+        <main tw="antialiased font-sans min-h-screen w-screen bg-white-off">
           <Component {...pageProps} />
         </main>
+        <footer
+          className={router.pathname === `/` || router.pathname === `/about` ? `rainbow` : ``}
+          tw="h-8 xl:(h-10)"
+          css={[projectColor(pageProps.project?.tag)]}
+        />
       </CacheProvider>
     </>
   );

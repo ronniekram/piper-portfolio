@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.10.5",
     "@floating-ui/react-dom-interactions": "^0.13.3",
     "@next/font": "13.1.6",
+    "@portabletext/react": "^2.0.2",
     "@sanity/image-url": "^1.0.2",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
