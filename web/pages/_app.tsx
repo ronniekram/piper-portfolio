@@ -1,11 +1,11 @@
 import { useState } from "react";
 import type { AppProps } from "next/app";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffectOnce } from "react-use";
 import tw from "twin.macro";
 import { cache } from "@emotion/css";
 import { CacheProvider } from "@emotion/react";
+import { DefaultSeo } from "next-seo";
 import { BsArrowThroughHeart } from "react-icons/bs";
 
 import { Project } from "../../studio/utils/types";
@@ -14,6 +14,7 @@ import GlobalStyles from "@web/src/style/global";
 import Nav from "@web/src/layout/nav";
 
 import { projectColor } from "@web/src/utils";
+import config from "@web/next-seo.config";
 
 import "@web/public/style/global.css";
 
@@ -39,17 +40,8 @@ export default function App({ Component, pageProps }: CustomAppProps) {
 
   return (
     <>
-      <Head>
-        <title>Piper Olsen</title>
-        <meta name="description" content="Piper Olsen Portfolio Website" key="desc" />
-        <meta property="og:url" content="https://piperolsen.design" />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="en" />
-        {/* <meta property="og:image" content="/opengraph.jpg" />
-        <link rel="icon" href="/favicon.png" /> */}
-      </Head>
-
       <CacheProvider value={cache}>
+        <DefaultSeo {...config} />
         <GlobalStyles />
         <Nav email={pageProps.email} insta={pageProps.insta} linkedin={pageProps.linkedin} />
         <main tw="antialiased font-sans min-h-screen w-screen bg-white-off">

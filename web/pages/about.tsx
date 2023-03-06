@@ -3,6 +3,7 @@ import { groq } from "next-sanity";
 import tw, { styled } from "twin.macro";
 import { PortableText } from "@portabletext/react";
 import type { PortableTextReactComponents } from "@portabletext/react";
+import { NextSeo } from "next-seo";
 
 import { About } from "@web/../studio/utils/types";
 import { sanityClient } from "@web/lib/sanity.client";
@@ -35,25 +36,26 @@ const portableComponents: Pick<PortableTextReactComponents, `block`> = {
 
 //! ----------> COMPONENTS <----------
 const AboutMe: NextPage<AboutProps> = ({ about }: AboutProps) => {
-  const { body, metaTitle, metaDescription, resume } = about;
-  console.log(resume.asset.url);
-
+  const { body, metaTitle, metaDesc, resume } = about;
   return (
-    <div tw="w-screen h-screen" className="rainbow">
-      <Container>
-        <div tw="w-[65%] mx-auto md:(w-[43.75%]) xl:(w-full)">
-          <div tw="flex">
-            <OhHey />
+    <>
+      <NextSeo title={metaTitle} description={metaDesc} />
+      <div tw="w-screen min-h-screen" className="rainbow">
+        <Container>
+          <div tw="w-[65%] mx-auto md:(w-[43.75%]) xl:(w-full)">
+            <div tw="flex">
+              <OhHey />
+            </div>
           </div>
-        </div>
-        <div tw="mt-12 md:(w-[53%] mx-auto) xl:(w-full mt-0)">
-          <PortableText value={body} components={portableComponents} />
-          <div tw="mt-10 md:(mt-24) xl:(mt-32)">
-            <DownloadResume url={resume.asset.url} />
+          <div tw="mt-12 md:(w-[53%] mx-auto) xl:(w-full mt-0)">
+            <PortableText value={body} components={portableComponents} />
+            <div tw="mt-10 md:(mt-24) xl:(mt-32)">
+              <DownloadResume url={resume.asset.url} />
+            </div>
           </div>
-        </div>
-      </Container>
-    </div>
+        </Container>
+      </div>
+    </>
   );
 };
 

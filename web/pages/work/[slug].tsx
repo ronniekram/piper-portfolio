@@ -1,6 +1,7 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import { groq } from "next-sanity";
 import tw, { styled } from "twin.macro";
+import { NextSeo } from "next-seo";
 
 import { Project } from "@web/../studio/utils/types";
 import { sanityClient } from "@web/lib/sanity.client";
@@ -29,6 +30,7 @@ const Container = styled(C)`
 const Work: NextPage<PageProps> = ({ project, nextProject }: PageProps) => {
   return (
     <>
+      <NextSeo title={project.metaTitle} description={project.metaDesc} />
       <Container>
         <section>
           <ProjectTag project={project} />
