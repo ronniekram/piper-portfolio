@@ -47,7 +47,7 @@ const Work: NextPage<PageProps> = ({ project, nextProject }: PageProps) => {
             <div tw="mb-20">
               <h2 tw="text-teal text-xl text-center font-serif">Related Work</h2>
               <div tw="w-full h-px bg-teal" />
-              <ProjectMedia project={project} />
+              <ProjectMedia project={project} related />
             </div>
           )}
         </section>
