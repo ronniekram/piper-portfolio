@@ -1,9 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import tw, { styled } from "twin.macro";
+import { useSpring, config, animated as a } from "react-spring";
+import { useWindowSize } from "react-use";
 import { BsLinkedin, BsInstagram, BsList, BsXSquare } from "react-icons/bs";
 
+import { useScrollListener } from "../utils";
 import Logo from "@web/src/assets/logo";
 import { Container as C, transform } from "@web/src/common/style";
 
@@ -15,11 +18,12 @@ type NavProps = {
 };
 
 //! ----------> STYLES <----------
-const Wrapper = styled.nav`
+const Wrapper = styled(a.nav)`
   ${tw`w-screen h-[5.25rem] md:(h-[7.5rem]) xl:(h-[11.25rem])`};
   ${tw`bg-white-off text-teal`};
   ${tw`font-serif`};
   ${tw`flex items-center`};
+  ${tw`fixed z-20`};
 `;
 
 const Container = styled(C)`
@@ -29,9 +33,28 @@ const Container = styled(C)`
 //! ----------> COMPONENTS <----------
 const Nav = ({ email, insta, linkedin }: NavProps) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
+
+  const scroll = useScrollListener();
+  const { width } = useWindowSize();
+
+  const springUp = width < 768 ? `-5.25rem` : width < 1280 ? `-7.5rem` : `-11.25rem`;
+
+  const spring = useSpring({
+    to: { top: show ? `0rem` : springUp, zIndex: show ? 50 : 10 },
+    config: { ...config.slow, clamp: true },
+  });
+
+  useEffect(() => {
+    if (scroll.y > 100 && scroll.y - scroll.lastY > 0) {
+      setShow(false);
+    } else {
+      setShow(true);
+    }
+  }, [scroll.y, scroll.lastY]);
 
   return (
-    <Wrapper id="nav">
+    <Wrapper id="nav" style={spring}>
       <Container>
         <div tw="flex items-center space-x-5 text-2xl xl:(w-1/3)">
           <a

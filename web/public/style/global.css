@@ -6,6 +6,7 @@ html, body {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  background: #FFFDF5;
 
   scroll-behavior: smooth !important;
 }

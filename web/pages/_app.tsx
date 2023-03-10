@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }: CustomAppProps) {
         <DefaultSeo {...config} />
         <GlobalStyles />
         <Nav email={pageProps.email} insta={pageProps.insta} linkedin={pageProps.linkedin} />
-        <main tw="antialiased font-sans min-h-screen w-screen bg-white-off">
+        <main tw="antialiased font-sans min-h-screen w-screen bg-white-off mt-[5.25rem] md:(mt-[7.5rem]) xl:(mt-[11.25rem])">
           <Component {...pageProps} />
         </main>
         <footer

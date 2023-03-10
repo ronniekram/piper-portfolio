@@ -1,6 +1,9 @@
 import Link from "next/link";
 import tw, { styled } from "twin.macro";
-import { BsLinkedin, BsInstagram, BsList, BsXSquare } from "react-icons/bs";
+import { useSpring, animated as a } from "react-spring";
+import { Fade as Burger } from "hamburger-react";
+import { ScrollLocky } from "react-scroll-locky";
+import { BsLinkedin, BsInstagram } from "react-icons/bs";
 
 //! ----------> TYPES <----------
 //! ----------> STYLES <----------
