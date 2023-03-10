@@ -44,9 +44,9 @@ const Work: NextPage<PageProps> = ({ project, nextProject }: PageProps) => {
             <ProjectDetail project={project} nextSlug={nextProject} />
           </div>
           {project.related && (
-            <div tw="mb-20">
+            <div tw="my-20">
               <h2 tw="text-teal text-xl text-center font-serif">Related Work</h2>
-              <div tw="w-full h-px bg-teal" />
+              <div tw="w-full h-px bg-teal mb-5 lg:(mb-6)" />
               <ProjectMedia project={project} related />
             </div>
           )}
@@ -67,6 +67,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const query = groq`*[_type == "project" && slug.current == $slug]{
       ...,
       media[]{
+        ...,
+        image{
+        ...,
+        asset->
+        }
+      },
+      related[]{
         ...,
         image{
         ...,
