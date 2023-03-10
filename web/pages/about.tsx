@@ -5,7 +5,7 @@ import { PortableText } from "@portabletext/react";
 import type { PortableTextReactComponents } from "@portabletext/react";
 import { NextSeo } from "next-seo";
 
-import { About } from "@web/../studio/utils/types";
+import { About, SiteDetail } from "@web/../studio/utils/types";
 import { sanityClient } from "@web/lib/sanity.client";
 
 import { Container as C } from "@web/src/common/style";
@@ -62,6 +62,7 @@ const AboutMe: NextPage<AboutProps> = ({ about }: AboutProps) => {
 export default AboutMe;
 
 export const getStaticProps: GetStaticProps = async () => {
+  const siteQuery = groq`*[_type == "site"]`;
   const query = groq`*[_type == "about"]{
     ...,
     resume{
@@ -71,11 +72,18 @@ export const getStaticProps: GetStaticProps = async () => {
   }`;
 
   const about = await client().fetch(query);
+  const details: SiteDetail = await client().fetch(siteQuery);
 
   if (!about) return { notFound: true };
+  if (!details) return { notFound: true };
+
+  const { email, insta, linkedin } = details[0];
 
   return {
     props: {
+      email,
+      insta,
+      linkedin,
       about: about[0],
     },
   };

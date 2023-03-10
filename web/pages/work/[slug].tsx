@@ -3,7 +3,7 @@ import { groq } from "next-sanity";
 import tw, { styled } from "twin.macro";
 import { NextSeo } from "next-seo";
 
-import { Project } from "@web/../studio/utils/types";
+import { Project, SiteDetail } from "@web/../studio/utils/types";
 import { sanityClient } from "@web/lib/sanity.client";
 
 import ProjectTag from "@web/src/project/tag";
@@ -63,6 +63,7 @@ export default Work;
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const options = { slug: params.slug };
+  const siteQuery = groq`*[_type == "site"]`;
   const query = groq`*[_type == "project" && slug.current == $slug]{
       ...,
       media[]{
@@ -73,16 +74,25 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         }
       }
   }`;
+
+  const details: SiteDetail = await client().fetch(siteQuery);
   const project: Project = await client().fetch(query, options);
   const projectsQuery = groq`*[_type == "project"] |order(orderRank)`;
   const projects = await client().fetch(projectsQuery);
+
+  if (!details) return { notFound: true };
   if (!project) return { notFound: true };
   if (!projects) return { notFound: true };
+
+  const { email, insta, linkedin } = details[0];
 
   const nextProject = projects.find((p: Project) => p.orderRank > project[0].orderRank);
 
   return {
     props: {
+      email,
+      insta,
+      linkedin,
       project: project[0],
       nextProject: nextProject ? nextProject.slug.current : projects[0].slug.current,
     },

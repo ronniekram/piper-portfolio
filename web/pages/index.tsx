@@ -41,10 +41,19 @@ const Home: NextPage = (props: PageProps) => {
   return (
     <div tw="w-screen h-full bg-white-off">
       <div tw="pt-6 pb-20 md:(pt-8 pb-24) xl:(pb-32)">
-        <Row projects={illustrations} />
-        <Row projects={scale} />
-        <Row projects={branding} />
-        <Row projects={apps} />
+        <div tw="hidden lg:(block)">
+          <Row projects={illustrations} />
+          <Row projects={scale} />
+          <Row projects={branding} />
+          <Row projects={apps} />
+        </div>
+        <Grid tw="lg:(hidden)">
+          {[...illustrations, ...scale, ...branding, ...apps].map((project) => (
+            <div key={project.slug.current}>
+              <ProjectCard project={project} />
+            </div>
+          ))}
+        </Grid>
       </div>
       <div tw="w-full flex justify-center pb-8">
         <BackToTop />

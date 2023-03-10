@@ -18,6 +18,12 @@ const Content = styled.div`
   ${tw`md:(text-xl)`};
 `;
 
+const Button = styled.button`
+  ${tw`text-teal text-lg font-serif`};
+  ${tw`flex items-center space-x-3`};
+  ${tw`md:(text-xl)`};
+`;
+
 //! ----------> COMPONENTS <----------
 export const ToDetail = () => (
   <AnchorLink href="#details" css={[transform]}>
@@ -62,12 +68,10 @@ export const DownloadResume = ({ url }: { url: string }) => (
 );
 
 const BackToTop = () => (
-  <AnchorLink href="#nav" css={[transform]}>
-    <Content>
-      <BsArrow90DegUp />
-      <p tw="mt-2">back to top</p>
-    </Content>
-  </AnchorLink>
+  <Button css={[transform]} type="button" onClick={() => scrollTo({ top: 0, behavior: `smooth` })}>
+    <BsArrow90DegUp />
+    <p tw="mt-2">back to top</p>
+  </Button>
 );
 
 export default BackToTop;

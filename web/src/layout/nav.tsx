@@ -4,14 +4,17 @@ import Link from "next/link";
 import tw, { styled } from "twin.macro";
 import { useSpring, config, animated as a } from "react-spring";
 import { useWindowSize } from "react-use";
-import { BsLinkedin, BsInstagram, BsList, BsXSquare } from "react-icons/bs";
+import { Fade as Burger } from "hamburger-react";
+import { ScrollLocky } from "react-scroll-locky";
+import { BsLinkedin, BsInstagram } from "react-icons/bs";
 
 import { useScrollListener } from "../utils";
 import Logo from "@web/src/assets/logo";
 import { Container as C, transform } from "@web/src/common/style";
+import MobileMenu from "./mobile";
 
 //! ----------> TYPES <----------
-type NavProps = {
+export type NavProps = {
   email: string;
   insta: string;
   linkedin: string;
@@ -19,7 +22,7 @@ type NavProps = {
 
 //! ----------> STYLES <----------
 const Wrapper = styled(a.nav)`
-  ${tw`w-screen h-[5.25rem] md:(h-[7.5rem]) xl:(h-[11.25rem])`};
+  ${tw`w-screen h-[5.25rem] md:(h-[7.5rem]) lg:(h-[11.25rem])`};
   ${tw`bg-white-off text-teal`};
   ${tw`font-serif`};
   ${tw`flex items-center`};
@@ -54,68 +57,81 @@ const Nav = ({ email, insta, linkedin }: NavProps) => {
   }, [scroll.y, scroll.lastY]);
 
   return (
-    <Wrapper id="nav" style={spring}>
-      <Container>
-        <div tw="flex items-center space-x-5 text-2xl xl:(w-1/3)">
-          <a
-            href={linkedin}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="LinkedIn"
-            css={[transform]}
-            tw="hidden md:(block)"
-          >
-            {" "}
-            <BsLinkedin />
-          </a>
-          <a
-            href={insta}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Instagram"
-            css={[transform]}
-            tw="hidden md:(block)"
-          >
-            {" "}
-            <BsInstagram />
-          </a>
-        </div>
-
-        <div tw="xl:(w-1/3)">
-          <div tw="w-[12.3125rem] md:(w-[15.4375rem]) mx-auto">
-            <Link href="/" passHref aria-label="Home">
-              <a css={[transform]}>
-                <Logo />
+    <ScrollLocky enabled={open}>
+      <>
+        <Wrapper id="nav" style={spring}>
+          <Container>
+            <div tw="flex items-center space-x-5 text-2xl lg:(w-1/3)">
+              <a
+                href={linkedin}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+                css={[transform]}
+                tw="hidden md:(block)"
+              >
+                {" "}
+                <BsLinkedin />
               </a>
-            </Link>
-          </div>
-        </div>
+              <a
+                href={insta}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+                css={[transform]}
+                tw="hidden md:(block)"
+              >
+                {" "}
+                <BsInstagram />
+              </a>
+            </div>
 
-        <div tw="xl:(w-1/3)">
-          <div tw="hidden xl:(flex items-center justify-end space-x-9 text-xl)">
-            <Link href="/" passHref>
-              <a css={[transform]}>work</a>
-            </Link>
-            <Link href="/about" passHref>
-              <a css={[transform]}>about</a>
-            </Link>
-            <a href={`mailto:${email}`} target="_blank" rel="noreferrer" css={[transform]}>
-              say hi!
-            </a>
-          </div>
-          <div tw="text-2xl xl:(hidden)">
-            <button
-              type="button"
-              css={[transform]}
-              onClick={() => setOpen(!open)}
-              aria-label={open ? `Close menu` : `Open menu`}
-            >
-              {open ? <BsXSquare /> : <BsList />}
-            </button>
-          </div>
-        </div>
-      </Container>
-    </Wrapper>
+            <div tw="lg:(w-1/3)">
+              <div tw="w-[12.3125rem] md:(w-[15.4375rem]) mx-auto">
+                <Link href="/" passHref aria-label="Home">
+                  <a css={[transform]}>
+                    <Logo />
+                  </a>
+                </Link>
+              </div>
+            </div>
+
+            <div tw="lg:(w-1/3)">
+              <div tw="hidden lg:(flex items-center justify-end space-x-9 text-xl)">
+                <Link href="/" passHref>
+                  <a css={[transform]}>work</a>
+                </Link>
+                <Link href="/about" passHref>
+                  <a css={[transform]}>about</a>
+                </Link>
+                <a href={`mailto:${email}`} target="_blank" rel="noreferrer" css={[transform]}>
+                  say hi!
+                </a>
+              </div>
+              <div
+                tw="text-2xl lg:(hidden)"
+                css={[
+                  ` div.hamburger-react > div {
+                height: 2px !important;
+                border-radius: 13em !important;
+              }`,
+                ]}
+              >
+                <Burger
+                  toggled={open}
+                  toggle={() => setOpen(!open)}
+                  size={20}
+                  label={open ? `Close Menu` : `Open Menu`}
+                  distance="md"
+                  rounded
+                />
+              </div>
+            </div>
+          </Container>
+        </Wrapper>
+        <MobileMenu open={open} email={email} insta={insta} linkedin={linkedin} />
+      </>
+    </ScrollLocky>
   );
 };
 
