@@ -1,5 +1,7 @@
 import type { NextPage, GetStaticProps } from "next";
+import { useState } from "react";
 import { groq } from "next-sanity";
+import { useSpring, animated as a, config } from "react-spring";
 import tw, { styled } from "twin.macro";
 
 import { SiteDetail, Project } from "@web/../studio/utils/types";
@@ -17,21 +19,43 @@ type PageProps = {
   scale: Project[];
 };
 
-const Grid = styled(Container)`
+const Grid = styled.div`
   ${tw`grid gap-4 xl:(gap-6)`};
   ${tw`grid-cols-1 md:(grid-cols-2) lg:(grid-cols-3)`};
   ${tw`mb-4 xl:(mb-6)`};
 `;
 
-const Row = ({ projects }: { projects: Project[] }) => {
+const Row = ({
+  projects,
+  type,
+}: {
+  projects: Project[];
+  type: `illustration` | `scale` | `branding` | `app`;
+}) => {
+  const [isHover, setIsHover] = useState<boolean>(false);
+
+  const spring = useSpring({
+    width: isHover ? `2.9375rem` : `0rem`,
+    config: {
+      ...config.slow,
+      // clamp: true,
+    },
+  });
+
   return (
-    <Grid>
-      {projects.map((project) => (
-        <div key={project.slug.current}>
-          <ProjectCard project={project} />
-        </div>
-      ))}
-    </Grid>
+    <div tw="relative" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+      <a.div tw="absolute h-full overflow-hidden -ml-[4rem]" style={spring}>
+        <Flag label={type} />
+      </a.div>
+
+      <Grid>
+        {projects.map((project) => (
+          <div key={project.slug.current}>
+            <ProjectCard project={project} />
+          </div>
+        ))}
+      </Grid>
+    </div>
   );
 };
 
@@ -40,24 +64,26 @@ const Home: NextPage = (props: PageProps) => {
 
   return (
     <div tw="w-screen h-full bg-white-off">
-      <div tw="pt-6 pb-20 md:(pt-8 pb-24) xl:(pb-32)">
-        <div tw="hidden lg:(block)">
-          <Row projects={illustrations} />
-          <Row projects={scale} />
-          <Row projects={branding} />
-          <Row projects={apps} />
+      <Container>
+        <div tw="pt-6 pb-20 md:(pt-8 pb-24) xl:(pb-32)">
+          <div tw="hidden lg:(block)">
+            <Row projects={illustrations} type="illustration" />
+            <Row projects={scale} type="scale" />
+            <Row projects={branding} type="branding" />
+            <Row projects={apps} type="app" />
+          </div>
+          <Grid tw="lg:(hidden)">
+            {[...illustrations, ...scale, ...branding, ...apps].map((project) => (
+              <div key={project.slug.current}>
+                <ProjectCard project={project} />
+              </div>
+            ))}
+          </Grid>
         </div>
-        <Grid tw="lg:(hidden)">
-          {[...illustrations, ...scale, ...branding, ...apps].map((project) => (
-            <div key={project.slug.current}>
-              <ProjectCard project={project} />
-            </div>
-          ))}
-        </Grid>
-      </div>
-      <div tw="w-full flex justify-center pb-8">
-        <BackToTop />
-      </div>
+        <div tw="w-full flex justify-center pb-8">
+          <BackToTop />
+        </div>
+      </Container>
     </div>
   );
 };
