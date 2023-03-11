@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import tw, { styled } from "twin.macro";
 import { useSpring, config, animated as a } from "react-spring";
@@ -35,6 +36,8 @@ const Container = styled(C)`
 
 //! ----------> COMPONENTS <----------
 const Nav = ({ email, insta, linkedin }: NavProps) => {
+  const router = useRouter();
+
   const [open, setOpen] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
 
@@ -44,7 +47,7 @@ const Nav = ({ email, insta, linkedin }: NavProps) => {
   const springUp = width < 768 ? `-5.25rem` : width < 1280 ? `-7.5rem` : `-11.25rem`;
 
   const spring = useSpring({
-    to: { top: show ? `0rem` : springUp, zIndex: show ? 50 : 10 },
+    to: { top: show ? `0rem` : springUp, zIndex: show ? 50 : 20 },
     config: { ...config.slow, clamp: true },
   });
 
@@ -55,6 +58,12 @@ const Nav = ({ email, insta, linkedin }: NavProps) => {
       setShow(true);
     }
   }, [scroll.y, scroll.lastY]);
+
+  useEffect(() => {
+    router.events.on(`routeChangeStart`, () => setOpen(false));
+
+    return () => router.events.off(`routeChangeStart`, () => setOpen(false));
+  }, []);
 
   return (
     <ScrollLocky enabled={open}>

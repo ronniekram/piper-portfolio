@@ -6,6 +6,7 @@ import tw from "twin.macro";
 import { cache } from "@emotion/css";
 import { CacheProvider } from "@emotion/react";
 import { DefaultSeo } from "next-seo";
+import { AnimatePresence } from "framer-motion";
 import { BsArrowThroughHeart } from "react-icons/bs";
 
 import { Project } from "../../studio/utils/types";
@@ -27,7 +28,6 @@ type CustomAppProps = AppProps & {
 
 export default function App({ Component, pageProps }: CustomAppProps) {
   const router = useRouter();
-
   const [showChild, setShowChild] = useState<boolean>(false);
 
   useEffectOnce(() => {
@@ -44,12 +44,14 @@ export default function App({ Component, pageProps }: CustomAppProps) {
         <DefaultSeo {...config} />
         <GlobalStyles />
         <Nav email={pageProps.email} insta={pageProps.insta} linkedin={pageProps.linkedin} />
-        <main tw="antialiased font-sans min-h-screen w-screen bg-white-off mt-[5.25rem] md:(mt-[7.5rem]) xl:(mt-[11.25rem])">
-          <Component {...pageProps} />
-        </main>
+        <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
+          <main tw="antialiased font-sans min-h-screen w-screen bg-white-off mt-[5.25rem] md:(mt-[7.5rem]) xl:(mt-[11.25rem])">
+            <Component {...pageProps} />
+          </main>
+        </AnimatePresence>
         <footer
           className={router.pathname === `/` ? `rainbow` : ``}
-          tw="h-8 px-5 md:(px-10) xl:(px-20 h-10) flex justify-end items-center"
+          tw="h-8 px-5 md:(px-10) xl:(px-20 h-10) flex justify-end items-center antialiased"
           css={[projectColor(pageProps.project?.tag), router.pathname === `/about` && tw`bg-teal`]}
         >
           <a

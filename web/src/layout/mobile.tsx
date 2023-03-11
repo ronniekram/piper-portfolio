@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from "next/link";
 import tw, { styled } from "twin.macro";
-import { useSpring, animated as a, config } from "react-spring";
+import { useSpring, animated as a } from "react-spring";
 import useMeasure from "react-use-measure";
 import { BsLinkedin, BsInstagram } from "react-icons/bs";
 
@@ -13,8 +13,8 @@ type Props = NavProps & {
 };
 
 //! ----------> STYLES <----------
-const Container = styled.nav`
-  ${tw`w-screen min-h-screen`};
+const Container = styled(a.nav)`
+  ${tw`w-screen flex`};
   ${tw`fixed lg:(hidden)`};
   ${tw`top-[5.25rem] md:(top-[7.5rem])`};
 
@@ -37,45 +37,30 @@ const Nav = styled.div`
 const MobileMenu = ({ open, email, insta, linkedin }: Props) => {
   const [ref, bounds] = useMeasure();
 
-  const overlaySpring = useSpring({
-    opacity: open ? 0.6 : 0,
-    config: {
-      ...config.gentle,
-      clamp: true,
-    },
-  });
-
   const menuSpring = useSpring({
-    left: open ? 0 : bounds?.width,
-    config: {
-      ...config.slow,
-      clamp: true,
-    },
+    left: open ? 0 : -bounds?.width,
   });
 
   return (
-    <Container ref={ref} css={[!open && tw`z-[-10]`]}>
-      <a.div tw="w-full h-full bg-olive-dark absolute top-0 z-0" style={overlaySpring} />
-      <a.div tw="w-full h-full flex absolute top-0 z-10" style={menuSpring}>
-        <div tw="w-0 md:(w-1/2 min-h-screen bg-transparent)" />
-        <Nav>
-          <Link href="/" passHref legacyBehavior>
-            <a>work</a>
-          </Link>
-          <Link href="/about" passHref legacyBehavior>
-            <a>about</a>
-          </Link>
-          <a href={`mailto:${email}`}>say hi!</a>
-          <a href={linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
-            {" "}
-            <BsLinkedin />
-          </a>
-          <a href={insta} target="_blank" rel="noreferrer" aria-label="Instagram">
-            {" "}
-            <BsInstagram />
-          </a>
-        </Nav>
-      </a.div>
+    <Container ref={ref} style={menuSpring} tw="overflow-hidden">
+      <div tw="w-0 md:(w-1/2 min-h-screen bg-olive-dark/60)" />
+      <Nav>
+        <Link href="/" passHref legacyBehavior>
+          <a>work</a>
+        </Link>
+        <Link href="/about" passHref legacyBehavior>
+          <a>about</a>
+        </Link>
+        <a href={`mailto:${email}`}>say hi!</a>
+        <a href={linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          {" "}
+          <BsLinkedin />
+        </a>
+        <a href={insta} target="_blank" rel="noreferrer" aria-label="Instagram">
+          {" "}
+          <BsInstagram />
+        </a>
+      </Nav>
     </Container>
   );
 };

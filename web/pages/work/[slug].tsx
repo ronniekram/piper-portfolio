@@ -22,7 +22,7 @@ type PageProps = {
 
 //! ----------> STYLES <----------
 const Container = styled(C)`
-  ${tw`grid grid-cols-1`};
+  ${tw`grid grid-cols-1 pt-6 md:(pt-7) lg:(pt-8)`};
   ${tw`xl:(grid-cols-[29.5%, 60.5%] gap-x-[10%])`};
 `;
 

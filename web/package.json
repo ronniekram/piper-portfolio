@@ -24,6 +24,7 @@
     "date-fns": "^2.29.3",
     "eslint": "8.33.0",
     "eslint-config-next": "^13.1.6",
+    "framer-motion": "^10.2.3",
     "groq": "^3.2.6",
     "hamburger-react": "^2.5.0",
     "next": "13.1.6",
