@@ -9,7 +9,7 @@ const config: DefaultSeoProps = {
     type: `website`,
     locale: `en_US`,
     url: `https://piperolsen.design`,
-    title: `Desing Portfolio @`,
+    title: `Design Portfolio @`,
     siteName: `Piper Olsen Design Portfolio`,
     description: `The design portfolio of Piper Olsen - a graphic designer in Pittsburgh, PA`,
     images: [
