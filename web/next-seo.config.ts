@@ -1,7 +1,7 @@
 import { DefaultSeoProps } from "next-seo";
 
 const config: DefaultSeoProps = {
-  titleTemplate: `%s @ Piper Olsen`,
+  titleTemplate: `%s @ Piper Olsen Designs`,
   title: `Design Portfolio`,
   description: `The design portfolio of Piper Olsen - a graphic designer in Pittsburgh, PA`,
   canonical: `https://piperolsen.design`,

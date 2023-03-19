@@ -38,7 +38,7 @@ export const SeeLive = ({ url }: { url: string }) => (
   <a href={url} target="_blank" rel="noreferrer" css={[transform]}>
     <Content>
       <BsEyeglasses />
-      <p tw="mt-2">next project</p>
+      <p tw="">see it live</p>
     </Content>
   </a>
 );
