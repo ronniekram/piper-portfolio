@@ -4908,6 +4908,13 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+next-sanity-image@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/next-sanity-image/-/next-sanity-image-6.0.0.tgz#38968317aa294fd06c7ff2e9df64ef8c8d0b3255"
+  integrity sha512-U4fl8CfJRgsUh3sJGoxgVrJ4bovCZDmWsjwowzDYbf66ci97j1mjdB+i3pz2CGFz//qbfmG8v2XL6dsYx1xFBg==
+  dependencies:
+    "@sanity/image-url" "^1.0.2"
+
 next-sanity@^4.1.2:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/next-sanity/-/next-sanity-4.1.5.tgz#3e99ce2846102ba083108d6962eeb389e22c982a"
