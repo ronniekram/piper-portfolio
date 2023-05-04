@@ -40,8 +40,8 @@ export default function App({ Component, pageProps }: CustomAppProps) {
 
   return (
     <>
+      <DefaultSeo {...config} />
       <CacheProvider value={cache}>
-        <DefaultSeo {...config} />
         <GlobalStyles />
         <Nav email={pageProps.email} insta={pageProps.insta} linkedin={pageProps.linkedin} />
         <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
