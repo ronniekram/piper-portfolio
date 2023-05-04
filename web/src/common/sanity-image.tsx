@@ -5,9 +5,8 @@ import type { ProjectImage } from "../../../studio/utils/types";
 import { sanityClient } from "@web/lib/sanity.client";
 
 const SanityImage = ({ media, priority }: { media: ProjectImage; priority?: boolean }) => {
-  const { metadata } = media.image.asset;
   const imageProps = useNextSanityImage(sanityClient, media.image, {
-    imageBuilder: (imageBuilder) => imageBuilder.auto(`format`).quality(100).fit(`clip`),
+    imageBuilder: (imageBuilder) => imageBuilder.auto(`format`).quality(100).fit(`fill`),
   });
 
   return (
@@ -15,8 +14,8 @@ const SanityImage = ({ media, priority }: { media: ProjectImage; priority?: bool
       {...imageProps}
       alt={media?.alt ?? ``}
       style={{ width: `100%`, height: `auto` }}
-      placeholder={metadata?.lqip ? `blur` : `empty`}
-      blurDataURL={metadata?.lqip ?? media.image.metadata?.lqip}
+      placeholder={media.image.asset.metadata?.lqip ? `blur` : `empty`}
+      blurDataURL={media.image.asset.metadata?.lqip}
       priority={priority}
     />
   );
