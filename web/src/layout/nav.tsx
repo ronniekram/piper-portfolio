@@ -1,10 +1,12 @@
+/* eslint-disable unicorn/no-negated-condition */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import tw, { styled } from "twin.macro";
 import { useSpring, config, animated as a } from "react-spring";
-import { useWindowSize } from "react-use";
+import useMeasure from "react-use-measure";
+import { useWindowSize, useEffectOnce } from "react-use";
 import { Fade as Burger } from "hamburger-react";
 import { ScrollLocky } from "react-scroll-locky";
 import { BsLinkedin, BsInstagram } from "react-icons/bs";
@@ -34,9 +36,21 @@ const Container = styled(C)`
   ${tw`w-full flex items-center justify-between`};
 `;
 
+const MobileContainer = styled(a.nav)`
+  ${tw`w-screen flex`}
+  ${tw`fixed lg:(hidden)`};
+  ${tw`top-[5.25rem] md:(top-[7.5rem])`};
+
+  a {
+    ${tw`transition duration-500 ease-in-out`};
+    ${tw`hover:(text-mint)`};
+  }
+`;
+
 //! ----------> COMPONENTS <----------
 const Nav = ({ email, insta, linkedin }: NavProps) => {
   const router = useRouter();
+  const [ref, bounds] = useMeasure();
 
   const [open, setOpen] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
@@ -49,6 +63,10 @@ const Nav = ({ email, insta, linkedin }: NavProps) => {
   const spring = useSpring({
     to: { top: show ? `0rem` : springUp, zIndex: show ? 50 : 20 },
     config: { ...config.slow, clamp: true },
+  });
+
+  const menuSpring = useSpring({
+    left: !bounds.width ? -1000 : open ? 0 : -bounds.width,
   });
 
   useEffect(() => {
@@ -64,6 +82,10 @@ const Nav = ({ email, insta, linkedin }: NavProps) => {
 
     return () => router.events.off(`routeChangeStart`, () => setOpen(false));
   }, []);
+
+  useEffectOnce(() => {
+    setOpen(false);
+  });
 
   return (
     <ScrollLocky enabled={open}>
@@ -98,9 +120,9 @@ const Nav = ({ email, insta, linkedin }: NavProps) => {
             <div tw="lg:(w-1/3)">
               <div tw="w-[12.3125rem] md:(w-[15.4375rem]) mx-auto">
                 <Link href="/" passHref aria-label="Home">
-                  <a css={[transform]}>
+                  <p css={[transform]}>
                     <Logo />
-                  </a>
+                  </p>
                 </Link>
               </div>
             </div>
@@ -108,10 +130,10 @@ const Nav = ({ email, insta, linkedin }: NavProps) => {
             <div tw="lg:(w-1/3)">
               <div tw="hidden lg:(flex items-center justify-end space-x-9 text-xl)">
                 <Link href="/" passHref>
-                  <a css={[transform]}>work</a>
+                  <p css={[transform]}>work</p>
                 </Link>
                 <Link href="/about" passHref>
-                  <a css={[transform]}>about</a>
+                  <p css={[transform]}>about</p>
                 </Link>
                 <a href={`mailto:${email}`} target="_blank" rel="noreferrer" css={[transform]}>
                   say hi!
@@ -138,7 +160,15 @@ const Nav = ({ email, insta, linkedin }: NavProps) => {
             </div>
           </Container>
         </Wrapper>
-        <MobileMenu open={open} email={email} insta={insta} linkedin={linkedin} />
+        <MobileContainer ref={ref} style={menuSpring} tw="overflow-hidden">
+          <MobileMenu
+            open={open}
+            setOpen={setOpen}
+            email={email}
+            insta={insta}
+            linkedin={linkedin}
+          />
+        </MobileContainer>
       </>
     </ScrollLocky>
   );

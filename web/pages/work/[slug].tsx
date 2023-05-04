@@ -11,6 +11,8 @@ import ProjectDetail from "@web/src/project/detail";
 import ProjectMedia from "@web/src/project/media";
 import BackToTop from "@web/src/common/go-to";
 
+import config from "@web/next-seo.config";
+
 import { Container as C } from "@web/src/common/style";
 
 const client = () => sanityClient;
@@ -30,7 +32,7 @@ const Container = styled(C)`
 const Work: NextPage<PageProps> = ({ project, nextProject }: PageProps) => {
   return (
     <>
-      <NextSeo title={project.metaTitle} description={project.metaDesc} />
+      <NextSeo {...config} title={project.metaTitle} description={project.metaDesc} />
       <Container>
         <section>
           <ProjectTag project={project} />

@@ -1650,6 +1650,11 @@
     "@typescript-eslint/types" "5.54.0"
     eslint-visitor-keys "^3.3.0"
 
+"@vercel/analytics@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@vercel/analytics/-/analytics-1.0.1.tgz#38308a626c91866cb00a249c08bf65251e9b9d81"
+  integrity sha512-Ux0c9qUfkcPqng3vrR0GTrlQdqNJ2JREn/2ydrVuKwM3RtMfF2mWX31Ijqo1opSjNAq6rK76PwtANw6kl6TAow==
+
 "@vitejs/plugin-react@^3.0.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-react/-/plugin-react-3.1.0.tgz#d1091f535eab8b83d6e74034d01e27d73c773240"
@@ -4907,6 +4912,13 @@ neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
+next-sanity-image@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/next-sanity-image/-/next-sanity-image-6.0.0.tgz#38968317aa294fd06c7ff2e9df64ef8c8d0b3255"
+  integrity sha512-U4fl8CfJRgsUh3sJGoxgVrJ4bovCZDmWsjwowzDYbf66ci97j1mjdB+i3pz2CGFz//qbfmG8v2XL6dsYx1xFBg==
+  dependencies:
+    "@sanity/image-url" "^1.0.2"
 
 next-sanity@^4.1.2:
   version "4.1.5"

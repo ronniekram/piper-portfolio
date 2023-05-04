@@ -1,8 +1,9 @@
 import type { NextPage, GetStaticProps } from "next";
 import { useState } from "react";
 import { groq } from "next-sanity";
-import { useSpring, animated as a, config } from "react-spring";
+import { useSpring, animated as a, config as springConfig } from "react-spring";
 import tw, { styled } from "twin.macro";
+import { NextSeo } from "next-seo";
 
 import { SiteDetail, Project } from "@web/../studio/utils/types";
 
@@ -11,6 +12,7 @@ import { Container } from "@web/src/common/style";
 import Flag from "@web/src/common/flag";
 import ProjectCard from "@web/src/project/card";
 import BackToTop from "@web/src/common/go-to";
+import config from "@web/next-seo.config";
 
 type PageProps = {
   apps: Project[];
@@ -37,8 +39,7 @@ const Row = ({
   const spring = useSpring({
     width: isHover ? `2.9375rem` : `0rem`,
     config: {
-      ...config.slow,
-      // clamp: true,
+      ...springConfig.slow,
     },
   });
 
@@ -51,7 +52,7 @@ const Row = ({
       <Grid>
         {projects.map((project) => (
           <div key={project.slug.current}>
-            <ProjectCard project={project} />
+            <ProjectCard project={project} priority={type === `illustration`} />
           </div>
         ))}
       </Grid>
@@ -63,28 +64,31 @@ const Home: NextPage = (props: PageProps) => {
   const { apps, branding, illustrations, scale } = props;
 
   return (
-    <div tw="w-screen h-full bg-white-off">
-      <Container>
-        <div tw="pt-6 pb-20 md:(pt-8 pb-24) xl:(pb-32)">
-          <div tw="hidden lg:(block)">
-            <Row projects={illustrations} type="illustration" />
-            <Row projects={scale} type="scale" />
-            <Row projects={branding} type="branding" />
-            <Row projects={apps} type="app" />
+    <>
+      <NextSeo {...config} />
+      <div tw="w-screen h-full bg-white-off">
+        <Container>
+          <div tw="pt-6 pb-20 md:(pt-8 pb-24) xl:(pb-32)">
+            <div tw="hidden lg:(block)">
+              <Row projects={illustrations} type="illustration" />
+              <Row projects={scale} type="scale" />
+              <Row projects={branding} type="branding" />
+              <Row projects={apps} type="app" />
+            </div>
+            <Grid tw="lg:(hidden)">
+              {[...illustrations, ...scale, ...branding, ...apps].map((project, i) => (
+                <div key={project.slug.current}>
+                  <ProjectCard project={project} priority={i === 0} />
+                </div>
+              ))}
+            </Grid>
           </div>
-          <Grid tw="lg:(hidden)">
-            {[...illustrations, ...scale, ...branding, ...apps].map((project) => (
-              <div key={project.slug.current}>
-                <ProjectCard project={project} />
-              </div>
-            ))}
-          </Grid>
-        </div>
-        <div tw="w-full flex justify-center pb-8">
-          <BackToTop />
-        </div>
-      </Container>
-    </div>
+          <div tw="w-full flex justify-center pb-8">
+            <BackToTop />
+          </div>
+        </Container>
+      </div>
+    </>
   );
 };
 
@@ -109,10 +113,10 @@ export const getStaticProps: GetStaticProps = async () => {
       email,
       insta,
       linkedin,
-      apps: projects.filter((project) => project.tag === `app`) ?? [],
-      scale: projects.filter((project) => project.tag === `scale`) ?? [],
-      branding: projects.filter((project) => project.tag === `branding`) ?? [],
-      illustrations: projects.filter((project) => project.tag === `illustration`) ?? [],
+      apps: projects.filter((project) => project.tag === `app`).slice(0, 3) ?? [],
+      scale: projects.filter((project) => project.tag === `scale`).slice(0, 3) ?? [],
+      branding: projects.filter((project) => project.tag === `branding`).slice(0, 3) ?? [],
+      illustrations: projects.filter((project) => project.tag === `illustration`).slice(0, 3) ?? [],
     },
   };
 };

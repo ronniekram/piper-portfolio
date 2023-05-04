@@ -1,13 +1,14 @@
-import { useState } from "react";
 import type { AppProps } from "next/app";
-import { useRouter } from "next/router";
+import { useState } from "react";
 import { useEffectOnce } from "react-use";
+import { useRouter } from "next/router";
 import tw from "twin.macro";
 import { cache } from "@emotion/css";
 import { CacheProvider } from "@emotion/react";
 import { DefaultSeo } from "next-seo";
 import { AnimatePresence } from "framer-motion";
 import { BsArrowThroughHeart } from "react-icons/bs";
+import { Analytics } from "@vercel/analytics/react";
 
 import { Project } from "../../studio/utils/types";
 
@@ -28,6 +29,7 @@ type CustomAppProps = AppProps & {
 
 export default function App({ Component, pageProps }: CustomAppProps) {
   const router = useRouter();
+
   const [showChild, setShowChild] = useState<boolean>(false);
 
   useEffectOnce(() => {
@@ -40,8 +42,8 @@ export default function App({ Component, pageProps }: CustomAppProps) {
 
   return (
     <>
+      <DefaultSeo {...config} />
       <CacheProvider value={cache}>
-        <DefaultSeo {...config} />
         <GlobalStyles />
         <Nav email={pageProps.email} insta={pageProps.insta} linkedin={pageProps.linkedin} />
         <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
@@ -58,11 +60,12 @@ export default function App({ Component, pageProps }: CustomAppProps) {
             href="https://ronniebee.dev/"
             target="_blank"
             rel="noreferrer"
-            tw="text-2xs text-plum font-sans font-xbold flex items-center transition duration-500 ease-in-out hover:(text-olive-dark)"
+            tw="text-xs text-plum font-sans font-xbold flex items-center transition duration-500 ease-in-out hover:(text-olive-dark)"
           >
             <p tw="mr-1.5">Made with</p> <BsArrowThroughHeart /> <p tw="ml-1.5">by ronnie bee</p>
           </a>
         </footer>
+        <Analytics />
       </CacheProvider>
     </>
   );

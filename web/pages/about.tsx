@@ -12,6 +12,8 @@ import { Container as C } from "@web/src/common/style";
 import OhHey from "@web/src/assets/about";
 import { DownloadResume } from "@web/src/common/go-to";
 
+import config from "@web/next-seo.config";
+
 const client = () => sanityClient;
 
 //! ----------> TYPES <----------
@@ -39,7 +41,7 @@ const AboutMe: NextPage<AboutProps> = ({ about }: AboutProps) => {
   const { body, metaTitle, metaDesc, resume } = about;
   return (
     <>
-      <NextSeo title={metaTitle} description={metaDesc} />
+      <NextSeo {...config} title={metaTitle} description={metaDesc} />
       <div tw="w-screen min-h-screen" className="rainbow">
         <Container>
           <div tw="w-[65%] mx-auto md:(w-[43.75%]) xl:(w-full)">
