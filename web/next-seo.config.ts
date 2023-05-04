@@ -3,7 +3,7 @@ import { DefaultSeoProps } from "next-seo";
 const config: DefaultSeoProps = {
   titleTemplate: `%s @ Piper Olsen Designs`,
   title: `Design Portfolio`,
-  description: `The design portfolio of Piper Olsen - a graphic designer in Pittsburgh, PA`,
+  description: `The design portfolio of Piper Olsen - a digital and print artist in Pittsburgh, PA`,
   canonical: `https://piperolsen.design`,
   openGraph: {
     type: `website`,
@@ -11,7 +11,7 @@ const config: DefaultSeoProps = {
     url: `https://piperolsen.design`,
     title: `Design Portfolio @`,
     siteName: `Piper Olsen Design Portfolio`,
-    description: `The design portfolio of Piper Olsen - a graphic designer in Pittsburgh, PA`,
+    description: `The design portfolio of Piper Olsen - a digital and print artist in Pittsburgh, PA`,
     images: [
       {
         url: `/opengraph.png`,

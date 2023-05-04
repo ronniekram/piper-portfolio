@@ -109,10 +109,10 @@ export const getStaticProps: GetStaticProps = async () => {
       email,
       insta,
       linkedin,
-      apps: projects.filter((project) => project.tag === `app`) ?? [],
-      scale: projects.filter((project) => project.tag === `scale`) ?? [],
-      branding: projects.filter((project) => project.tag === `branding`) ?? [],
-      illustrations: projects.filter((project) => project.tag === `illustration`) ?? [],
+      apps: projects.filter((project) => project.tag === `app`).slice(0, 3) ?? [],
+      scale: projects.filter((project) => project.tag === `scale`).slice(0, 3) ?? [],
+      branding: projects.filter((project) => project.tag === `branding`).slice(0, 3) ?? [],
+      illustrations: projects.filter((project) => project.tag === `illustration`).slice(0, 3) ?? [],
     },
   };
 };
