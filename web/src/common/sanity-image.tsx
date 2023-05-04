@@ -7,12 +7,7 @@ import { sanityClient } from "@web/lib/sanity.client";
 const SanityImage = ({ media, priority }: { media: ProjectImage; priority?: boolean }) => {
   const { metadata } = media.image.asset;
   const imageProps = useNextSanityImage(sanityClient, media.image, {
-    imageBuilder: (imageBuilder, options) =>
-      imageBuilder
-        .auto(`format`)
-        .quality(100)
-        .fit(`clip`)
-        .width(options.width || Math.min(options.originalImageDimensions.width, 715)),
+    imageBuilder: (imageBuilder) => imageBuilder.auto(`format`).quality(100).fit(`clip`),
   });
 
   return (
