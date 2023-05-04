@@ -78,7 +78,7 @@ const Home: NextPage = (props: PageProps) => {
             <Grid tw="lg:(hidden)">
               {[...illustrations, ...scale, ...branding, ...apps].map((project, i) => (
                 <div key={project.slug.current}>
-                  <ProjectCard project={project} priority={i === 0 || i === 1} />
+                  <ProjectCard project={project} priority={i === 0} />
                 </div>
               ))}
             </Grid>
