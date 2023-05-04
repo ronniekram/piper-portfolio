@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }: CustomAppProps) {
             href="https://ronniebee.dev/"
             target="_blank"
             rel="noreferrer"
-            tw="text-2xs text-plum font-sans font-xbold flex items-center transition duration-500 ease-in-out hover:(text-olive-dark)"
+            tw="text-xs text-plum font-sans font-xbold flex items-center transition duration-500 ease-in-out hover:(text-olive-dark)"
           >
             <p tw="mr-1.5">Made with</p> <BsArrowThroughHeart /> <p tw="ml-1.5">by ronnie bee</p>
           </a>
