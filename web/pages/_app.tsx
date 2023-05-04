@@ -8,6 +8,7 @@ import { CacheProvider } from "@emotion/react";
 import { DefaultSeo } from "next-seo";
 import { AnimatePresence } from "framer-motion";
 import { BsArrowThroughHeart } from "react-icons/bs";
+import { Analytics } from "@vercel/analytics/react";
 
 import { Project } from "../../studio/utils/types";
 
@@ -64,6 +65,7 @@ export default function App({ Component, pageProps }: CustomAppProps) {
             <p tw="mr-1.5">Made with</p> <BsArrowThroughHeart /> <p tw="ml-1.5">by ronnie bee</p>
           </a>
         </footer>
+        <Analytics />
       </CacheProvider>
     </>
   );
