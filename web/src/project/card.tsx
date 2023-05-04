@@ -27,9 +27,9 @@ const ProjectCard = ({ project, priority }: { project: Project; priority?: boole
       onMouseLeave={() => set(false)}
     >
       {isHover ? (
-        <SanityImage media={thumb} priority={priority} />
-      ) : (
         <SanityImage media={thumbHover} priority={priority} />
+      ) : (
+        <SanityImage media={thumb} priority={priority} />
       )}
     </Link>
   );

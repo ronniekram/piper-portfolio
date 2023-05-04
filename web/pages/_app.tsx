@@ -1,7 +1,5 @@
-import { useState } from "react";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import { useEffectOnce } from "react-use";
 import tw from "twin.macro";
 import { cache } from "@emotion/css";
 import { CacheProvider } from "@emotion/react";
@@ -28,15 +26,6 @@ type CustomAppProps = AppProps & {
 
 export default function App({ Component, pageProps }: CustomAppProps) {
   const router = useRouter();
-  const [showChild, setShowChild] = useState<boolean>(false);
-
-  useEffectOnce(() => {
-    setShowChild(true);
-  });
-
-  if (!showChild) return null;
-
-  if (typeof window === `undefined`) return <></>;
 
   return (
     <>
