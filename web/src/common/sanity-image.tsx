@@ -6,7 +6,8 @@ import { sanityClient } from "@web/lib/sanity.client";
 
 const SanityImage = ({ media, priority }: { media: ProjectImage; priority?: boolean }) => {
   const imageProps = useNextSanityImage(sanityClient, media.image, {
-    imageBuilder: (imageBuilder) => imageBuilder.format(`webp`).quality(100).fit(`fill`),
+    imageBuilder: (imageBuilder, options) =>
+      imageBuilder.auto(`format`).quality(100).fit(`clip`).width(options.width),
   });
 
   return (
