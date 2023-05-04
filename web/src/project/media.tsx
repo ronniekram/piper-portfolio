@@ -12,8 +12,7 @@ const Wrapper = styled.section`
 
 const ImgWrapper = styled.div(({ isWide }: { isWide: boolean }) => [
   `border: 1px solid rgba(0, 39, 34, 0.5);`,
-  isWide && tw`col-span-2`,
-  tw`w-full overflow-hidden`,
+  isWide && tw`md:(col-span-2)`,
 ]);
 
 //! ----------> COMPONENTS <----------
