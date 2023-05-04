@@ -6,7 +6,7 @@ import { Project } from "@web/../studio/utils/types";
 import SanityImage from "../common/sanity-image";
 
 //! ----------> COMPONENTS <----------
-const ProjectCard = ({ project }: { project: Project }) => {
+const ProjectCard = ({ project, priority }: { project: Project; priority?: boolean }) => {
   const [isHover, set] = useState<boolean>(false);
 
   const thumb = {
@@ -26,7 +26,11 @@ const ProjectCard = ({ project }: { project: Project }) => {
       onMouseEnter={() => set(true)}
       onMouseLeave={() => set(false)}
     >
-      {isHover ? <SanityImage media={thumb} /> : <SanityImage media={thumbHover} />}
+      {isHover ? (
+        <SanityImage media={thumb} priority={priority} />
+      ) : (
+        <SanityImage media={thumbHover} priority={priority} />
+      )}
     </Link>
   );
 };
