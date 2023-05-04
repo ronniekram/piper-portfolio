@@ -98,9 +98,9 @@ const Nav = ({ email, insta, linkedin }: NavProps) => {
             <div tw="lg:(w-1/3)">
               <div tw="w-[12.3125rem] md:(w-[15.4375rem]) mx-auto">
                 <Link href="/" passHref aria-label="Home">
-                  <a css={[transform]}>
+                  <p css={[transform]}>
                     <Logo />
-                  </a>
+                  </p>
                 </Link>
               </div>
             </div>
@@ -108,10 +108,10 @@ const Nav = ({ email, insta, linkedin }: NavProps) => {
             <div tw="lg:(w-1/3)">
               <div tw="hidden lg:(flex items-center justify-end space-x-9 text-xl)">
                 <Link href="/" passHref>
-                  <a css={[transform]}>work</a>
+                  <p css={[transform]}>work</p>
                 </Link>
                 <Link href="/about" passHref>
-                  <a css={[transform]}>about</a>
+                  <p css={[transform]}>about</p>
                 </Link>
                 <a href={`mailto:${email}`} target="_blank" rel="noreferrer" css={[transform]}>
                   say hi!
